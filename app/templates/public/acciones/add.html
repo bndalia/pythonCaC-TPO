@@ -1,0 +1,86 @@
+{% extends 'public/layout.html' %}
+{% block title %}Registrar Auto{% endblock %}
+
+{% block body %}
+
+
+<section>
+    <h2>
+        <a href="/" class="left" title="Volver"><i class="bi bi-arrow-left-circle"></i></a>
+        Registrar Nuevo Auto
+        <hr>
+    </h2>
+
+    <form action="{{ url_for('formAddAuto') }}" method="POST" class="mb-3" autocomplete="off" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col">
+                <label for="marca">Marca</label>
+                <input type="text" name="marca" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="modelo">Modelo</label>
+                <input type="text" name="modelo" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="year">Año</label>
+                <select name="year" class="form-control" required>
+                    <option value="">--- Seleccione el año ---</option>
+                    {% for year in range(2023,2009,-1) %}
+                        <option value="{{ year }}"> {{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <label for="color">Color</label>
+                <select name="color" class="form-control" required>
+                    <option value="">--- Seleccione el Color ---</option>
+                    <option value="Negro">Negro</option>
+                    <option value="Rojo">Rojo</option>
+                    <option value="Gris">Gris</option>
+                    <option value="Blanco">Blanco</option>
+                    <option value="Plata">Plata</option>
+                    <option value="Azul">Azul</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="puertas">Puertas</label>
+                <select name="puertas" class="form-control" required>
+                    <option value="">--- Cantidad de Puertas ---</option>
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label for="puertas">Combustible</label>
+                <br><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="combustible" value="Nafta" checked>
+                    <label class="form-check-label" for="combustible">Nafta</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="combustible" value="Diesel">
+                    <label class="form-check-label" for="combustible">Diesel</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <label for="foto">Foto del Auto</label>
+                <input type="file" name="foto" class="form-control-file" accept="image/*" required>
+            </div>
+        </div>
+        <hr>
+
+        <input class="button-primary mt-3 btn btn-info btn-block bold" type="submit" value="Guardar Registro">
+    </form>
+</section>
+
+{% endblock %}

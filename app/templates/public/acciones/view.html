@@ -1,0 +1,50 @@
+{% extends 'public/layout.html' %}
+{% block title %}Registrar Auto{% endblock %}
+
+{% block body %}
+
+
+<section>
+    <h2>
+        <a href="/" class="left" title="Volver"><i class="bi bi-arrow-left-circle"></i></a>
+        Detalles del Auto
+        <hr>
+    </h2>
+
+    {% if (infoAuto) %}
+    
+    <!-- {{ infoAuto }} -->
+
+
+    <div class="card" style="width: 25rem;">
+      {% set urlAuto = '/static/assets/fotos_autos/' %}
+        {% if(infoAuto.foto) %}
+          <img src="{{ urlAuto }}{{ infoAuto.foto }}" class="card-img-top" alt="coche">
+        {% else %}
+          <img src="{{ urlAuto }}sin_foto.jpg" class="card-img-top sin_foto" alt="coche">
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title"> <strong>{{ infoAuto.marca }}</strong></h5>
+        </div>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Modelo: <strong>{{ infoAuto.modelo }}</strong></li>
+          <li class="list-group-item">Año: <strong>{{ infoAuto.year }}</strong></li>
+          <li class="list-group-item">Color: <strong>{{ infoAuto.color }}</strong></li>
+          <li class="list-group-item">Número de puertas: <strong>{{ infoAuto.puertas }}</strong></li>
+          <li class="list-group-item">Combustible: <strong>{{ infoAuto.combustible }}</strong></li>
+        </ul>
+      </div>
+
+      {% else %}
+      <div class="col-12">
+          <h2 class="text-center">
+              No existe el Coche
+          </h2>
+      </div>
+{% endif %}
+
+</section>
+
+{% endblock %}

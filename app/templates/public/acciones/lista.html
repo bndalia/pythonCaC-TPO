@@ -1,0 +1,64 @@
+
+<!-- {{ miData }} -->
+{% if (miData) %}
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Año</th>
+                <th scope="col">Combustible</th>
+                <th scope="col">Foto</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for auto in miData %}
+            {% with urlAuto = '/static/assets/fotos_autos/' %}
+            <tr id="Registro_{{ auto.id }}">
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ auto.marca }}</td>
+                <td>{{ auto.modelo }}</td>
+                <td>{{ auto.year }}</td>
+                <td width="50">{{ auto.combustible }}</td>
+                <td>
+                    {% if(auto.foto !="") %}
+                    <img src="{{ urlAuto }}{{ auto.foto }}" class="sin_foto_mini" alt="{{ auto.marca }}">
+                    {% else %}
+                    <img src="{{ urlAuto }}sin_foto.png" class="sin_foto_mini" alt="auto_foto">
+                    {% endif %}
+                </td>
+                <td width="300">
+                    <span style="display: flex; justify-content:space-between;">
+                        <a href="{{ url_for('viewDetalleAuto', idAuto = auto.id ) }}" type="button"
+                            class="btn btn-warning btn-sm" tooltip="Ver Registro">
+                            <i class="bi bi-eye"></i>
+                            Ver
+                        </a>
+                        <a href="{{ url_for('formViewUpdate', id = auto.id ) }}" class="btn btn-info btn-sm"
+                            tooltip="Actualizar Registro">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Actualizar
+                        </a>
+                        <a href="#" id="id_{{ auto.id }}" data-foto="{{ auto.foto }}" onclick="eliminarAutoJavaScript('{{ auto.id }}');" class="btn btn-danger btn-sm"
+                            tooltip="Eliminar Registro">
+                            <i class="bi bi-trash3"></i>
+                            Eliminar
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h3 class="text-center">No hay Autos</h3>
+    </div>
+</div>
+{% endif %}
